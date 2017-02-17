@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    group project.pluginGroup
+    version project.pluginVersion
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    shadowJar {
+        dependencies {
+            include(dependency('redis.clients:jedis'))
+            include(dependency('org.apache.commons:commons-pool2'))
+        }
+
+        relocate 'org.apache.commons.pool2', 'com.pokelb.shade.commons.pooling'
+        relocate 'redis.clients', 'com.pokelb.shade.redis'
+    }
+}

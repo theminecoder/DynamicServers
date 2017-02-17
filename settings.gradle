@@ -1,0 +1,3 @@
+rootProject.name = 'dynamicservers'
+
+include 'dynamicservers-common', 'dynamicservers-spigot', 'dynamicservers-sponge', 'dynamicservers-bungeecord'
