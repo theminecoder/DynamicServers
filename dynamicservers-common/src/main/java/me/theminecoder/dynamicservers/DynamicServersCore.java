@@ -33,7 +33,11 @@ public class DynamicServersCore {
         }
         ClassLoader previous = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(DynamicServersCore.class.getClassLoader());
-        JEDIS_POOL = new JedisPool(new GenericObjectPoolConfig(), hostname, port, 5000, password);
+        if(password!=null && password.trim().length()>0) {
+            JEDIS_POOL = new JedisPool(new GenericObjectPoolConfig(), hostname, port, 5000, password);
+        } else {
+            JEDIS_POOL = new JedisPool(new GenericObjectPoolConfig(), hostname, port, 5000);
+        }
         Thread.currentThread().setContextClassLoader(previous);
         GSON = new GsonBuilder().create();
         Thread listenerThread = new Thread(() -> {
