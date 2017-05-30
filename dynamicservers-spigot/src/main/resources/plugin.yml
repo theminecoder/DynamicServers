@@ -1,3 +1,3 @@
 name: DynamicServers
 version: 1.0
-main: com.pokelb.network.dynamicservers.DynamicServersSpigot
+main: me.theminecoder.dynamicservers.DynamicServersSpigot

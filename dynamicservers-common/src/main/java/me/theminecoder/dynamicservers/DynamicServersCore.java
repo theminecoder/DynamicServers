@@ -25,7 +25,7 @@ public class DynamicServersCore {
     private static JedisPool JEDIS_POOL;
     private static Gson GSON;
 
-    private static Cache<String, ServerData> SERVER_CACHE = CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.SECONDS).build();
+    private static Cache<String, ServerData> SERVER_CACHE = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.SECONDS).build();
 
     static void boot(String hostname, int port, String password, Logger log) {
         if (JEDIS_POOL != null) {
