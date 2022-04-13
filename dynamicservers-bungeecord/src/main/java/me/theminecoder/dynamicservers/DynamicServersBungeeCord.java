@@ -73,6 +73,7 @@ public final class DynamicServersBungeeCord extends Plugin implements Listener {
                     currentServerEntry.getValue().getPlayers().forEach(player ->
                             player.disconnect("That server has timed out, broken connection?"));
                     currentServerIterator.remove();
+                    this.getLogger().info("Removed "+currentServerEntry.getValue().getName()+" due to timeout...");
                 }
             }
 
@@ -81,6 +82,7 @@ public final class DynamicServersBungeeCord extends Plugin implements Listener {
                 ServerInfo newServer = this.getProxy().constructServerInfo(serverEntry.getKey(),
                         new InetSocketAddress(newIp[0], Integer.parseInt(newIp[1])), "", false);
                 currentServers.put(serverEntry.getKey(), newServer);
+                this.getLogger().info("Added "+serverEntry.getKey()+" ("+newIp[0]+":"+newIp[1]+")");
             });
         }, 0, 5, TimeUnit.SECONDS);
         this.getProxy().getPluginManager().registerListener(this, this);

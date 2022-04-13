@@ -22,7 +22,7 @@ public final class DynamicServersSpigot extends JavaPlugin {
                 this.getLogger()
         );
 
-        String detectedServerId = new File(".").getAbsoluteFile().getName();
+        String detectedServerId = new File("server.properties").getAbsoluteFile().getParentFile().getName();
         try {
             Properties serverProperties = new Properties();
             serverProperties.load(new FileReader("server.properties"));
@@ -41,7 +41,7 @@ public final class DynamicServersSpigot extends JavaPlugin {
                         this.getServer().getMaxPlayers()
                 )));
             }
-        }, 0, 60);
+        }, 0, 20);
     }
 
     @Override

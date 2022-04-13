@@ -25,7 +25,7 @@ public class DynamicServersCore {
     private static JedisPool JEDIS_POOL;
     private static Gson GSON;
 
-    private static Cache<String, ServerData> SERVER_CACHE = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.SECONDS).build();
+    private static final Cache<String, ServerData> SERVER_CACHE = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.SECONDS).build();
 
     static void boot(String hostname, int port, String password, Logger log) {
         if (JEDIS_POOL != null) {
@@ -64,6 +64,11 @@ public class DynamicServersCore {
                     }
                 } catch (Exception e) {
                     e.printStackTrace(); //pls no crash thread :(
+                    try {
+                        log.info("Sleeping for 1 second before reconnecting");
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ignored) {
+                    }
                 }
             }
         });
