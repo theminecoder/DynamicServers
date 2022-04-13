@@ -64,7 +64,7 @@ public final class DynamicServersBungeeCord extends Plugin implements Listener {
                                 player.disconnect("That server has changed IP while online, duplicate server?"));
                         String[] newIp = backendServers.get(currentServerEntry.getKey()).getIp().split(":");
                         ServerInfo newServer = this.getProxy().constructServerInfo(currentServerEntry.getKey(),
-                                new InetSocketAddress(newIp[0], Integer.valueOf(newIp[1])), "", false);
+                                new InetSocketAddress(newIp[0], Integer.parseInt(newIp[1])), "", false);
                         this.getLogger().warning("Server IP for \"" + currentServerEntry.getKey() + "\" updated!");
                         currentServerEntry.setValue(newServer);
                     }
@@ -79,7 +79,7 @@ public final class DynamicServersBungeeCord extends Plugin implements Listener {
             backendServers.entrySet().stream().filter(serverEntry -> !currentServers.containsKey(serverEntry.getKey())).forEach(serverEntry -> {
                 String[] newIp = backendServers.get(serverEntry.getKey()).getIp().split(":");
                 ServerInfo newServer = this.getProxy().constructServerInfo(serverEntry.getKey(),
-                        new InetSocketAddress(newIp[0], Integer.valueOf(newIp[1])), "", false);
+                        new InetSocketAddress(newIp[0], Integer.parseInt(newIp[1])), "", false);
                 currentServers.put(serverEntry.getKey(), newServer);
             });
         }, 0, 5, TimeUnit.SECONDS);

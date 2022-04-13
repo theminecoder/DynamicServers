@@ -1,17 +1,10 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
-    }
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven'
+    apply plugin: 'java-library'
+//    apply plugin: 'maven'
     apply plugin: 'com.github.johnrengelman.shadow'
 
     group project.pluginGroup
@@ -22,16 +15,17 @@ subprojects {
 
     repositories {
         mavenCentral()
-        jcenter()
     }
 
     shadowJar {
+        archiveFileName = "${project.name}.jar"
+
         dependencies {
-            include(dependency('redis.clients:jedis'))
-            include(dependency('org.apache.commons:commons-pool2'))
+            exclude(dependency("com.google.code.gson:gson"))
+            exclude(dependency("com.google.guava:guava:18.0"))
         }
 
-        relocate 'org.apache.commons.pool2', 'com.pokelb.shade.commons.pooling'
-        relocate 'redis.clients', 'com.pokelb.shade.redis'
+        relocate 'org.apache.commons.pool2', 'me.theminecoder.shade.commons.pooling'
+        relocate 'redis.clients', 'me.theminecoder.shade.redis'
     }
 }

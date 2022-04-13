@@ -10,18 +10,13 @@ repositories {
 }
 
 dependencies {
-    compile project(':dynamicservers-common')
-    compile 'org.spigotmc:spigot-api:1.11-R0.1-SNAPSHOT'
+    api project(':dynamicservers-common')
+    compileOnly 'org.spigotmc:spigot-api:1.11-R0.1-SNAPSHOT'
 }
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
+        duplicatesStrategy = DuplicatesStrategy.WARN
         expand 'version': project.version
-    }
-}
-
-shadowJar {
-    dependencies {
-        include(dependency(':dynamicservers-common'))
     }
 }

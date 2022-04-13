@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    compile project(':dynamicservers-common')
-    compile 'org.spongepowered:spongeapi:4.1.0'
+    api project(':dynamicservers-common')
+    compileOnly 'org.spongepowered:spongeapi:4.1.0'
 }
 
 processResources {
